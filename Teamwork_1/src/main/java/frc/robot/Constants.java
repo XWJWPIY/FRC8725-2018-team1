@@ -4,12 +4,9 @@ package frc.robot;
 import edu.wpi.first.math.util.Units; // 常用單位之間轉換
 import edu.wpi.first.math.geometry.Translation2d; // 轉為 2D 坐標系
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.TrapezoidProfile; // 軌跡運算.梯形輪廓
 
 public final class Constants {
-
-    public static final class Joystick {
-        
-    }
 
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // inch -> m
@@ -41,7 +38,7 @@ public final class Constants {
 
         public static final boolean kFrontLeftDriveEncoderReversed = true;
         public static final boolean kBackLeftDriveEncoderReversed = true;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = false; // 理論上要反轉的 Neo
         public static final boolean kBackRightDriveEncoderReversed = false;
 
         public static final boolean kFrontLeftDriveAbsoluteEncoderReversed = false;
@@ -55,5 +52,29 @@ public final class Constants {
         public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 31.2;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(12); // 紀錄 feet 轉換 Meter 倍率
+        public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
+
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2; // 遠程驅動最大前進速度值
+        public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = // 遠程驅動最大旋轉速度值
+                kPhysicalMaxAngularSpeedRadiansPerSecond / 4 * 1.5;
+        public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3; // 遠程驅動最大前進加速度
+        public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3; // 遠程驅動最大角加速度
     }
+
+    // 自動用常數
+    // public static final class AutoConstants {
+    //     public static final double kMaxSpeedMetersPerSecond = DriveConstants.kPhysicalMaxSpeedMetersPerSecond / 4;
+    //     public static final double kMaxAngularSpeedRadiansPerSecond = //
+    //         DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
+    //     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    //     public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
+    //     public static final double kPXController = 1.5;
+    //     public static final double kPYController = 1.5;
+    //     public static final double kPThetaController = 3;
+
+    //     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = // 角度控制
+    //         new TrapezoidProfile.Constraints(
+    //             kMaxAngularSpeedRadiansPerSecond,
+    //             kMaxAngularAccelerationRadiansPerSecondSquared);
+    // }
 }
