@@ -106,12 +106,19 @@ public class SwerveSubsystem extends SubsystemBase {
         backRight.stop();
     }
     // TO-DO
-    public void setModuleStates(SwerveModuleState[] desiredStates) { // 設定理想狀態 (?
+    public void setModuleStates(SwerveModuleState[] desiredStates) { // 設定模組狀態
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         frontLeft.setDesiredState(desiredStates[0]);
         frontRight.setDesiredState(desiredStates[1]);
         backLeft.setDesiredState(desiredStates[2]);
         backRight.setDesiredState(desiredStates[3]);
+    }
+
+    public void resetTurningmotor () {
+        frontLeft.ResetTurningMotor(); // 重製轉動的馬達
+        frontRight.ResetTurningMotor();
+        backLeft.ResetTurningMotor();
+        backRight.ResetTurningMotor();
     }
 
 
