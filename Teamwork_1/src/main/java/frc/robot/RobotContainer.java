@@ -21,9 +21,9 @@ import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
-// import frc.robot.commands.ResetTuringmotor;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.GamepadJoystick;
 
 public class RobotContainer {
 
@@ -32,14 +32,23 @@ public class RobotContainer {
     private final Joystick driverJoytick = new Joystick(GamepadJoystick.kDriverControllerPort);
 
     public RobotContainer() {
+        m_swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
+                m_swerveSubsystem,
+                () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverYAxis),
+                () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverXAxis),
+                () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverRotAxis),
+                () -> !driverJoytick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
 
-      configureButtonBindings();
+        configureButtonBindings();
     }
 
-    private void configureButtonBindings() {}
+    private void configureButtonBindings() {
+      new JoystickButton(driverJoytick, 2).whenPressed(() -> m_swerveSubsystem.zeroHeading()); // 歸零
+    }
 
-
+    /*
     public Command getAutonomousCommand() {
-        return m_autoCommand;
+
     }
+    */
 }
