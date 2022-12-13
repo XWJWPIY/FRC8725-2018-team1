@@ -40,27 +40,27 @@ public class SwerveJoystickCmd extends CommandBase {
         // 1. Get real-time joystick inputs
         double xSpeed = xSpdFunction.get(); // 得到 x 軸的即時值
         double ySpeed = ySpdFunction.get(); // 得到 y 軸的即時值
-        double turningSpeed = turningSpdFunction.get(); // 
+        double turningSpeed = turningSpdFunction.get(); // 得控制旋轉角度桿的值
 
         // 2. Apply deadband
-        xSpeed = Math.abs(xSpeed) > GamepadJoystick.kDeadband ? xSpeed : 0.0;
+        xSpeed = Math.abs(xSpeed) > GamepadJoystick.kDeadband ? xSpeed : 0.0; // 搖桿值轉換
         ySpeed = Math.abs(ySpeed) > GamepadJoystick.kDeadband ? ySpeed : 0.0;
         turningSpeed = Math.abs(turningSpeed) > GamepadJoystick.kDeadband ? turningSpeed : 0.0;
 
-        //if (xSpeed == 0 && ySpeed == 0 && turningSpeed == 0) {
-        //    this.swerveSubsystem.resetTurningmotor();
-        //    return;
-        //}
+        if (xSpeed == 0 && ySpeed == 0 && turningSpeed == 0) { // 歸零時重製
+           this.swerveSubsystem.resetTurningmotor();
+           return;
+        }
 
         // 3. Make the driving smoother
-        xSpeed = xLimiter.calculate(xSpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
+        xSpeed = xLimiter.calculate(xSpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond; // 計算速度
         ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
         turningSpeed = turningLimiter.calculate(turningSpeed)
                 * DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
 
         // 4. Construct desired chassis speeds
         ChassisSpeeds chassisSpeeds;
-        if (fieldOrientedFunction.get()) {
+        if (fieldOrientedFunction.get()) { 
             // Relative to field
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                     xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
