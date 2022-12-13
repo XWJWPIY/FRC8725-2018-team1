@@ -25,9 +25,9 @@ public class SwerveJoystickCmd extends CommandBase {
         this.ySpdFunction = ySpdFunction;
         this.turningSpdFunction = turningSpdFunction;
         this.fieldOrientedFunction = fieldOrientedFunction;
-        this.xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
-        this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
-        this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond);
+        this.xLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond); // x 極限
+        this.yLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond); // y 極限
+        this.turningLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAngularAccelerationUnitsPerSecond); // 轉動極限
         addRequirements(swerveSubsystem);
     }
 
@@ -38,9 +38,9 @@ public class SwerveJoystickCmd extends CommandBase {
     @Override
     public void execute() {
         // 1. Get real-time joystick inputs
-        double xSpeed = xSpdFunction.get();
-        double ySpeed = ySpdFunction.get();
-        double turningSpeed = turningSpdFunction.get();
+        double xSpeed = xSpdFunction.get(); // 得到 x 軸的即時值
+        double ySpeed = ySpdFunction.get(); // 得到 y 軸的即時值
+        double turningSpeed = turningSpdFunction.get(); // 
 
         // 2. Apply deadband
         xSpeed = Math.abs(xSpeed) > GamepadJoystick.kDeadband ? xSpeed : 0.0;
