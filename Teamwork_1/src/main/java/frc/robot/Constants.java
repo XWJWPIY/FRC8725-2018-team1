@@ -89,7 +89,9 @@ public final class Constants {
     }
 
     public static final class ElevatorConstants {
-        
+        public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // inch -> m
+        public static final double kMotorGearRatio = 1 / 8.14; // 齒輪轉動比 (待確認)
+        public static final double kEncoderRot2Meter = kMotorGearRatio * Math.PI * kWheelDiameterMeters; // 以 Encorder 的值轉換為車輪行走之距離，單位為 m
     }
 
 
