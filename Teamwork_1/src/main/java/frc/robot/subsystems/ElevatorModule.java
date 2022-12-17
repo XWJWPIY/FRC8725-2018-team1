@@ -41,22 +41,23 @@ public class ElevatorModule {
         Encoder.setPosition(0);
     }
 
+
     public void stop() { // 停止轉動
         Motor.set(0);
     }
 
-    /* 搖桿控制
-    public void setDesiredState(SwerveModuleState state) { // 設定階段(輸入值)
-        if (Math.abs(state.speedMetersPerSecond) < 0.001) {
-            stop(); // 停止轉動
-            return;
+    // 搖桿控制
+    public void Running(boolean Running, boolean reverse) { 
+        if (Running == true) { // 若是啟動
+            if (reverse) { // 方向是否反轉
+                Motor.set(ElevatorModuleConstants.kElevatorEncoderRPM2MeterPerSec); // 向下
+            } else {
+                Motor.set(-ElevatorModuleConstants.kElevatorEncoderRPM2MeterPerSec); // 向上
+            }
         }
-        state = SwerveModuleState.optimize(state, getState().angle);
-        driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
-        turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
-        SmartDashboard.putString("Swerve[" + absoluteEncoder.getDeviceID() + "] state", state.toString());
+        getDrivePosition();
         putDashboard(); // 功能在底下
-    }*/
+    }
 
     public void putDashboard () { // 記分板及時顯示數值
         SmartDashboard.putNumber("High: " + Motor.getDeviceId(), Encoder.getPosition());
