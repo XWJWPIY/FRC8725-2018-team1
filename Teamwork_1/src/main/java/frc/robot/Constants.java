@@ -84,7 +84,7 @@ public final class Constants {
         public static final double kElevatorMotorWheelDiameterMeters = Units.inchesToMeters(kElevatorMotorWheelRadius * 2); // 馬達輪 inch -> m
         public static final double kElevatorUpperWheelDiameterMeters = Units.inchesToMeters(kElevatorUpperWheelRadius * 2); // 升降輪 inch -> m
         public static final double kElevatorMotorGearRatio = 1 / 8.14; // 齒輪轉動比
-        public static final double kElevatorEncoderRot2Meter = kElevatorMotorGearRatio * Math.PI * kElevatorMotorWheelDiameterMeters; // 以 Encorder 的值轉換為升降之位置，單位為 m
+        public static final double kElevatorEncoderRot2Meter = kElevatorMotorGearRatio * Math.PI * kElevatorMotorWheelDiameterMeters; // 以 Encorder 的值轉換為現在高度，單位為 m
         public static final double kElevatorEncoderRPM2MeterPerSec = kElevatorEncoderRot2Meter / 60; // 將單位轉換為 m/s
     }
 
