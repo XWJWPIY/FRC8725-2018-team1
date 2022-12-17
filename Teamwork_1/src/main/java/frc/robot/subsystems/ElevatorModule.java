@@ -14,11 +14,13 @@ public class ElevatorModule {
     private final CANSparkMax Motor; // 升降馬達
 
     private final RelativeEncoder Encoder; // 前進用馬達編碼器紀錄
+    private final boolean MotorReversed;
 
     // private final PIDController turningPidController; // 
 
     public ElevatorModule(int MotorId, boolean MotorReversed) {
         Motor = new CANSparkMax(MotorId, MotorType.kBrushless);
+        this.MotorReversed = MotorReversed;
 
         Motor.setIdleMode(IdleMode.kBrake); // 設為無動力時以慣性滑行
 
@@ -60,6 +62,10 @@ public class ElevatorModule {
     }
 
     public void putDashboard () { // 記分板及時顯示數值
-        SmartDashboard.putNumber("High: " + Motor.getDeviceId(), Encoder.getPosition());
+        if (MotorReversed == false) {
+            SmartDashboard.putNumber("Left Elevator: " + Motor.getDeviceId(), Encoder.getPosition());
+        } else {
+            SmartDashboard.putNumber("Right Elevator: " + Motor.getDeviceId(), Encoder.getPosition());
+        }
     }
 }
