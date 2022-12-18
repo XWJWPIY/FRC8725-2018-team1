@@ -22,12 +22,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.SwerveJoystickCmd;
+import frc.robot.commands.ElevatorJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.GamepadJoystick;
 
 public class RobotContainer {
 
     private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
+    private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
 
     private final Joystick driverJoytick = new Joystick(GamepadJoystick.kDriverControllerPort);
 
@@ -38,6 +41,8 @@ public class RobotContainer {
                 () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverXAxis),
                 () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverRotAxis),
                 () -> !driverJoytick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
+
+        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverYAxis)));
 
         configureButtonBindings();
     }
