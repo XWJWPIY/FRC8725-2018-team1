@@ -16,6 +16,11 @@ public class ElevatorSubsystem extends SubsystemBase {
         new Thread(() -> {}).start();
     }
 
+    public void runModules(boolean run, boolean reverse) { // 執行模組
+        LeftMotor.Running(run, reverse);
+        RightMotor.Running(run, !reverse);
+    }
+ 
     @Override
     public void periodic() {
         LeftMotor.putDashboard(); // 上傳左電梯高度 Encoder
