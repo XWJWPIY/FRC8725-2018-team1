@@ -25,4 +25,11 @@ public class RobotMap {
         public static final int kLeftMotorPort = 13;
         public static final int kRightMotorPort = 14;
     }
+
+    public class FixturePort {
+        public static final int kLeftHandMotorPort = 15;
+        public static final int kRightHandMotorPort = 16;
+        public static final int kLeftArmMotorPort = 17;
+        public static final int kRighArmMotorPort = 18;
+    }
 }
