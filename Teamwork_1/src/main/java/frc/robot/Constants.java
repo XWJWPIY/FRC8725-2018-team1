@@ -86,13 +86,24 @@ public final class Constants {
         public static final double kElevatorMotorGearRatio = 1 / 8.14; // 齒輪轉動比
         public static final double kElevatorEncoderRot2Meter = kElevatorMotorGearRatio * Math.PI * kElevatorMotorWheelDiameterMeters; // 以 Encorder 的值轉換為現在高度，單位為 m
         public static final double kElevatorEncoderRPM2MeterPerSec = kElevatorEncoderRot2Meter / 60; // 將單位轉換為 m/s
+        public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(12); // 紀錄 feet 轉換 Meter 倍率
+        public static final double kElevatorMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2; // 遠程驅動最大前進速度值
     }
 
     public static final class ElevatorConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // inch -> m
         public static final double kMotorGearRatio = 1 / 8.14; // 齒輪轉動比 (待確認)
         public static final double kEncoderRot2Meter = kMotorGearRatio * Math.PI * kWheelDiameterMeters; // 以 Encorder 的值轉換為車輪行走之距離，單位為 m
+
     }
 
-
+    public static final class FixtureConstants {
+        public static final double kBackFixtureMotorGearRatio = 1 / 8.14; // 齒輪轉動比
+        public static final double kFrontFixtureWheelRadius = 2; // 帶動輪半徑
+        public static final double kFrontFixtureWheelDiameterMeters = Units.inchesToMeters(kFrontFixtureWheelRadius * 2);
+        public static final double kFrontFixtureGearRatio = 1; // 齒輪轉動比
+        public static final double kFrontFixtureEncoderRot2Meter = kFrontFixtureGearRatio * Math.PI * kFrontFixtureWheelDiameterMeters; // 以 Encorder 的值轉換為現在收納位置，單位為 m
+        public static final double kBackFixtureEncoderRot2Rad = kBackFixtureMotorGearRatio * 2 * Math.PI; // 以 Encorder 的值轉換為角度
+        public static final double kBackFixtureRPM2MeterPerSec = kFrontFixtureEncoderRot2Meter / 60; // 將單位轉換為 m/s
+    }
 }
