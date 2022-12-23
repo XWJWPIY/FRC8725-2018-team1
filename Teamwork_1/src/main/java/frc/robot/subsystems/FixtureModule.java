@@ -54,6 +54,22 @@ public class FixtureModule {
         ArmMotor.set(0);
     }
 
+    public void HandRunning(boolean Running, boolean reverse) {  // 手臂收放方塊
+        if (Running == true) { // 若是啟動
+            if (reverse) { // 方向是否反轉
+                HandMotor.set(FixtureConstants.kBackFixtureRPM2MeterPerSec); // 逆
+            } else {
+                HandMotor.set(-FixtureConstants.kBackFixtureRPM2MeterPerSec); // 順
+            }
+        }
+        getHandPosition();
+        putDashboard(); // 功能在底下
+    }
 
+
+    public void putDashboard () { // 記分板及時顯示數值
+        SmartDashboard.putNumber("Hand : " + HandMotor.getDeviceId(), HandMotorEncoder.getPosition());
+        SmartDashboard.putNumber("Arm : " + ArmMotor.getDeviceId(), ArmMotorEncoder.getPosition());
+    }
 
 }
