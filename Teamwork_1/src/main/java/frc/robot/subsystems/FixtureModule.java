@@ -22,7 +22,7 @@ public class FixtureModule {
 
 
 
-    public FixtureModule(int HandMotorId, boolean HandMotorReversed, int ArmMotorId, Boolean ArmMotorReversed) {
+    public FixtureModule(int HandMotorId, boolean HandMotorReversed, int ArmMotorId, Boolean ArmMotorReversed) { // 手部接腳、手部反轉、手肘接腳、手肘反轉
         HandMotor = new CANSparkMax(HandMotorId, MotorType.kBrushless);
         ArmMotor = new CANSparkMax(ArmMotorId, MotorType.kBrushless);
         this.HandMotorReversed = HandMotorReversed;
@@ -57,9 +57,21 @@ public class FixtureModule {
     public void HandRunning(boolean Running, boolean reverse) {  // 手臂收放方塊
         if (Running == true) { // 若是啟動
             if (reverse) { // 方向是否反轉
-                HandMotor.set(FixtureConstants.kBackFixtureRPM2MeterPerSec); // 逆
+                HandMotor.set(FixtureConstants.kBackFixtureRPM2MeterPerSec); // 吸
             } else {
-                HandMotor.set(-FixtureConstants.kBackFixtureRPM2MeterPerSec); // 順
+                HandMotor.set(-FixtureConstants.kBackFixtureRPM2MeterPerSec); // 吐
+            }
+        }
+        getHandPosition();
+        putDashboard(); // 功能在底下
+    }
+
+    public void ArmRunning(boolean Running, boolean reverse) {  // 手臂開合
+        if (Running == true) { // 若是啟動
+            if (reverse) { // 方向是否反轉
+                ArmMotor.set(FixtureConstants.kBackFixtureRPM2MeterPerSec); // 開
+            } else {
+                ArmMotor.set(-FixtureConstants.kBackFixtureRPM2MeterPerSec); // 合
             }
         }
         getHandPosition();
@@ -68,8 +80,16 @@ public class FixtureModule {
 
 
     public void putDashboard () { // 記分板及時顯示數值
-        SmartDashboard.putNumber("Hand : " + HandMotor.getDeviceId(), HandMotorEncoder.getPosition());
-        SmartDashboard.putNumber("Arm : " + ArmMotor.getDeviceId(), ArmMotorEncoder.getPosition());
+        if (HandMotorReversed == true) {
+            SmartDashboard.putNumber("Left Hand : " + HandMotor.getDeviceId(), HandMotorEncoder.getPosition());
+        } else {
+            SmartDashboard.putNumber("Right Hand : " + HandMotor.getDeviceId(), HandMotorEncoder.getPosition());
+        }
+        if (ArmMotorReversed == true) {
+            SmartDashboard.putNumber("Left Arm : " + ArmMotor.getDeviceId(), ArmMotorEncoder.getPosition());
+        } else {
+            SmartDashboard.putNumber("Right Arm : " + ArmMotor.getDeviceId(), ArmMotorEncoder.getPosition());
+        }
     }
 
 }
