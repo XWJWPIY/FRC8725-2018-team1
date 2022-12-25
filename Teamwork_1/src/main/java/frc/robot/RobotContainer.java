@@ -35,31 +35,31 @@ public class RobotContainer {
     private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
     private final FixtureSubsystem m_fixtureSubsystem = new FixtureSubsystem();
 
-    private final Joystick driverJoytick = new Joystick(GamepadJoystick.kDriverControllerPort);
+    private final Joystick driverJoystick = new Joystick(GamepadJoystick.kDriverControllerPort);
 
     public RobotContainer() {
         m_swerveSubsystem.setDefaultCommand(new SwerveJoystickCmd(
                 m_swerveSubsystem,
-                () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverYAxis),
-                () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverXAxis),
-                () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverRotAxis),
-                () -> !driverJoytick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
+                () -> driverJoystick.getRawAxis(GamepadJoystick.kDriverYAxis),
+                () -> driverJoystick.getRawAxis(GamepadJoystick.kDriverXAxis),
+                () -> driverJoystick.getRawAxis(GamepadJoystick.kDriverRotAxis),
+                () -> !driverJoystick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
 
-        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, () -> driverJoytick.getRawAxis(GamepadJoystick.kElevatorAxis)));
-        m_fixtureSubsystem.setDefaultCommand(new FixtureJoystickCmd(m_fixtureSubsystem, () -> driverJoytick.getRawAxis(GamepadJoystick.kFixtureArmAxis))); // 夾子開合
+        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, () -> driverJoystick.getRawAxis(GamepadJoystick.kElevatorAxis)));
+        
+        m_fixtureSubsystem.setDefaultCommand(new FixtureJoystickCmd(
+                m_fixtureSubsystem, 
+                () -> driverJoystick.getRawAxis(GamepadJoystick.kFixtureArmAxis),
+                () -> driverJoystick.getRawButton(GamepadJoystick.kFixturePullButtonIdx),
+                () -> driverJoystick.getRawButton(GamepadJoystick.kFixturePushButtonIdx))); // 夾子開合
 
         configureButtonBindings();
     }
 
     private void configureButtonBindings() {
-        new JoystickButton(driverJoytick, GamepadJoystick.kDriverFieldOrientedButtonIdx).whenPressed(() -> m_swerveSubsystem.zeroHeading()); // 歸零
-        if (driverJoytick.getRawButtonPressed(GamepadJoystick.kFixturePullButtonIdx) == true) {
-            m_fixtureSubsystem.runHandModules(true, false); // 手收方塊
-        } else if (driverJoytick.getRawButtonPressed(GamepadJoystick.kFixturePushButtonIdx) == true) {
-            m_fixtureSubsystem.runHandModules(true, true); // 手吐方塊
-        } else {
-            m_fixtureSubsystem.runHandModules(false, false); // 手部停止收放
-        }
+        new JoystickButton(driverJoystick, GamepadJoystick.kDriverFieldOrientedButtonIdx).whenPressed(() -> m_swerveSubsystem.zeroHeading()); // 歸零
+
+
     }
 
     /*
