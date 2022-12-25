@@ -23,14 +23,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.ElevatorJoystickCmd;
+import frc.robot.commands.FixtureJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.FixtureSubsystem;
 import frc.robot.GamepadJoystick;
 
 public class RobotContainer {
 
     private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
     private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
+    private final FixtureSubsystem m_fixtureSubsystem = new FixtureSubsystem();
 
     private final Joystick driverJoytick = new Joystick(GamepadJoystick.kDriverControllerPort);
 
@@ -42,13 +45,21 @@ public class RobotContainer {
                 () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverRotAxis),
                 () -> !driverJoytick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
 
-        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, () -> driverJoytick.getRawAxis(GamepadJoystick.kDriverYAxis)));
+        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, () -> driverJoytick.getRawAxis(GamepadJoystick.kElevatorAxis)));
+        m_fixtureSubsystem.setDefaultCommand(new FixtureJoystickCmd(m_fixtureSubsystem, () -> driverJoytick.getRawAxis(GamepadJoystick.kFixtureArmAxis))); // 夾子開合
 
         configureButtonBindings();
     }
 
     private void configureButtonBindings() {
-      new JoystickButton(driverJoytick, 2).whenPressed(() -> m_swerveSubsystem.zeroHeading()); // 歸零
+        new JoystickButton(driverJoytick, GamepadJoystick.kDriverFieldOrientedButtonIdx).whenPressed(() -> m_swerveSubsystem.zeroHeading()); // 歸零
+        if (driverJoytick.getRawButtonPressed(GamepadJoystick.kFixturePullButtonIdx) == true) {
+            m_fixtureSubsystem.runHandModules(true, false); // 手收方塊
+        } else if (driverJoytick.getRawButtonPressed(GamepadJoystick.kFixturePushButtonIdx) == true) {
+            m_fixtureSubsystem.runHandModules(true, true); // 手吐方塊
+        } else {
+            m_fixtureSubsystem.runHandModules(false, false); // 手部停止收放
+        }
     }
 
     /*
