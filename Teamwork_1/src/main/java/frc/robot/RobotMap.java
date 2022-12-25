@@ -30,6 +30,6 @@ public class RobotMap {
         public static final int kLeftHandMotorPort = 15;
         public static final int kRightHandMotorPort = 16;
         public static final int kLeftArmMotorPort = 17;
-        public static final int kRighArmMotorPort = 18;
+        public static final int kRightArmMotorPort = 18;
     }
 }
