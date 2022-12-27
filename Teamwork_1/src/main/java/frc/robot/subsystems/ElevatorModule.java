@@ -52,9 +52,9 @@ public class ElevatorModule {
     public void Running(boolean Running, boolean reverse) { 
         if (Running == true) { // 若是啟動
             if (reverse) { // 方向是否反轉
-                Motor.set(ElevatorModuleConstants.kElevatorEncoderRPM2MeterPerSec); // 逆
+                Motor.set(ElevatorModuleConstants.kTurningSpeed); // 逆
             } else {
-                Motor.set(-ElevatorModuleConstants.kElevatorEncoderRPM2MeterPerSec); // 順
+                Motor.set(-ElevatorModuleConstants.kTurningSpeed); // 順
             }
         }
         getDrivePosition();
