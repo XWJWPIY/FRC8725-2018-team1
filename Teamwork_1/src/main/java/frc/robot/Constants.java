@@ -4,7 +4,6 @@ package frc.robot;
 import edu.wpi.first.math.util.Units; // 常用單位之間轉換
 import edu.wpi.first.math.geometry.Translation2d; // 轉為 2D 坐標系
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile; // 軌跡運算.梯形輪廓
 
 public final class Constants {
 
@@ -15,7 +14,7 @@ public final class Constants {
         public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters; // 以 Encorder 的值轉換為車輪行走之距離，單位為 m
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI; // 以 Encorder 的值轉換為角度
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60; // 將單位轉換為 m/s
-        public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // 將單位轉換為 m/s
+        public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60; // 將單位轉換為 rad/s
         public static final double kPTurning = 0.5; // kP
     }
 
@@ -61,23 +60,6 @@ public final class Constants {
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3; // 遠程驅動最大角加速度
     }
 
-    // 自動用常數
-    // public static final class AutoConstants {
-    //     public static final double kMaxSpeedMetersPerSecond = DriveConstants.kPhysicalMaxSpeedMetersPerSecond / 4;
-    //     public static final double kMaxAngularSpeedRadiansPerSecond = //
-    //         DriveConstants.kPhysicalMaxAngularSpeedRadiansPerSecond / 10;
-    //     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
-    //     public static final double kMaxAngularAccelerationRadiansPerSecondSquared = Math.PI / 4;
-    //     public static final double kPXController = 1.5;
-    //     public static final double kPYController = 1.5;
-    //     public static final double kPThetaController = 3;
-
-    //     public static final TrapezoidProfile.Constraints kThetaControllerConstraints = // 角度控制
-    //         new TrapezoidProfile.Constraints(
-    //             kMaxAngularSpeedRadiansPerSecond,
-    //             kMaxAngularAccelerationRadiansPerSecondSquared);
-    // }
-
     public static final class ElevatorModuleConstants {
         public static final double kElevatorMotorWheelRadius = 2; // 馬達輪半徑
         public static final double kElevatorUpperWheelRadius = 2; // 升降輪半徑
@@ -88,22 +70,26 @@ public final class Constants {
         public static final double kElevatorEncoderRPM2MeterPerSec = kElevatorEncoderRot2Meter / 60; // 將單位轉換為 m/s
         public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(12); // 紀錄 feet 轉換 Meter 倍率
         public static final double kElevatorMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2; // 遠程驅動最大前進速度值
-    }
-
-    public static final class ElevatorConstants {
-        public static final double kWheelDiameterMeters = Units.inchesToMeters(4); // inch -> m
-        public static final double kMotorGearRatio = 1 / 8.14; // 齒輪轉動比 (待確認)
-        public static final double kEncoderRot2Meter = kMotorGearRatio * Math.PI * kWheelDiameterMeters; // 以 Encorder 的值轉換為車輪行走之距離，單位為 m
-
+        public static final double kTurningSpeed = 0.5; // 轉動速度
     }
 
     public static final class FixtureConstants {
-        public static final double kBackFixtureMotorGearRatio = 1 / 8.14; // 齒輪轉動比
+        public static final double kBackFixtureMotorGearRatio = 1; // 齒輪轉動比
         public static final double kFrontFixtureWheelRadius = 2; // 帶動輪半徑
         public static final double kFrontFixtureWheelDiameterMeters = Units.inchesToMeters(kFrontFixtureWheelRadius * 2);
         public static final double kFrontFixtureGearRatio = 1; // 齒輪轉動比
         public static final double kFrontFixtureEncoderRot2Meter = kFrontFixtureGearRatio * Math.PI * kFrontFixtureWheelDiameterMeters; // 以 Encorder 的值轉換為現在收納位置，單位為 m
         public static final double kBackFixtureEncoderRot2Rad = kBackFixtureMotorGearRatio * 2 * Math.PI; // 以 Encorder 的值轉換為角度
-        public static final double kBackFixtureRPM2MeterPerSec = kFrontFixtureEncoderRot2Meter / 60; // 將單位轉換為 m/s
+        public static final double kFrontFixtureRPM2MeterPerSec = kFrontFixtureEncoderRot2Meter / 60; // 將單位轉換為 m/s
+        public static final double kBackFixtureEncoderRot2RadPerSec = kBackFixtureEncoderRot2Rad / 60; // 將單位轉換為 rad/s
+        public static final double kArmTurningSpeed = 0.5; // 轉動速度
+        public static final double kHandTurningSpeed = 0.5;
+    }
+
+    public static final class PlatformConstants {
+        public static final double kBackPlatformMotorGearRatio = 1; // 齒輪轉動比
+        public static final double kBackPlatformEncoderRot2Rad = kBackPlatformMotorGearRatio * 2 * Math.PI; // 以 Encorder 的值轉換為角度
+        public static final double kBackPlatformEncoderRot2RadPerSec = kBackPlatformEncoderRot2Rad / 60; // 將單位轉換為 rad/s
+        public static final double kPlatformTurningSpeed = 0.5;  // 轉動速度
     }
 }
