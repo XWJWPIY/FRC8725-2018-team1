@@ -34,6 +34,7 @@ public class RobotMap {
     }
 
     public class PlatformPort {
-        public static final int kPlatformPort = 19;
+        public static final int kLeftPlatformPort = 19;
+        public static final int kRightPlatformPort = 20;
     }
 }
