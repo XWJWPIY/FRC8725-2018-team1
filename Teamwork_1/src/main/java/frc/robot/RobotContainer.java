@@ -24,9 +24,11 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.SwerveJoystickCmd;
 import frc.robot.commands.ElevatorJoystickCmd;
 import frc.robot.commands.FixtureJoystickCmd;
+import frc.robot.commands.PlatformJoystickCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.FixtureSubsystem;
+import frc.robot.subsystems.PlatformSubsystem;
 import frc.robot.GamepadJoystick;
 
 public class RobotContainer {
@@ -34,6 +36,7 @@ public class RobotContainer {
     private final SwerveSubsystem m_swerveSubsystem = new SwerveSubsystem();
     private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
     private final FixtureSubsystem m_fixtureSubsystem = new FixtureSubsystem();
+    private final PlatformSubsystem m_platformSubsystem = new PlatformSubsystem();
 
     private final Joystick driverJoystick = new Joystick(GamepadJoystick.kDriverControllerPort);
 
@@ -52,6 +55,11 @@ public class RobotContainer {
                 () -> driverJoystick.getRawAxis(GamepadJoystick.kFixtureArmAxis),
                 () -> driverJoystick.getRawButton(GamepadJoystick.kFixturePullButtonIdx),
                 () -> driverJoystick.getRawButton(GamepadJoystick.kFixturePushButtonIdx))); // 夾子開合
+    
+        m_platformSubsystem.setDefaultCommand(new PlatformJoystickCmd(
+                m_platformSubsystem,
+                () -> driverJoystick.getRawButton(GamepadJoystick.kPlatformClockButtonIdx),
+                () -> driverJoystick.getRawButton(GamepadJoystick.kPlatformUnclockButtonIdx))); // 平台旋轉
 
         configureButtonBindings();
     }
