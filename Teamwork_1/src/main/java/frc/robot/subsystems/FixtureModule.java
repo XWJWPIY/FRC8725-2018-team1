@@ -57,9 +57,9 @@ public class FixtureModule {
     public void HandRunning(boolean Running, boolean reverse) {  // 手臂收放方塊
         if (Running == true) { // 若是啟動
             if (reverse) { // 方向是否反轉
-                HandMotor.set(FixtureConstants.kBackFixtureRPM2MeterPerSec); // 吸
+                HandMotor.set(FixtureConstants.kFrontFixtureRPM2MeterPerSec); // 吸
             } else {
-                HandMotor.set(-FixtureConstants.kBackFixtureRPM2MeterPerSec); // 吐
+                HandMotor.set(-FixtureConstants.kFrontFixtureRPM2MeterPerSec); // 吐
             }
         }
         getHandPosition();
@@ -69,9 +69,9 @@ public class FixtureModule {
     public void ArmRunning(boolean Running, boolean reverse) {  // 手臂開合
         if (Running == true) { // 若是啟動
             if (reverse) { // 方向是否反轉
-                ArmMotor.set(FixtureConstants.kBackFixtureRPM2MeterPerSec); // 開
+                ArmMotor.set(FixtureConstants.kBackFixtureEncoderRot2RadPerSec); // 開
             } else {
-                ArmMotor.set(-FixtureConstants.kBackFixtureRPM2MeterPerSec); // 合
+                ArmMotor.set(-FixtureConstants.kBackFixtureEncoderRot2RadPerSec); // 合
             }
         }
         getHandPosition();
