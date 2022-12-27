@@ -32,4 +32,8 @@ public class RobotMap {
         public static final int kLeftArmMotorPort = 17;
         public static final int kRightArmMotorPort = 18;
     }
+
+    public class PlatformPort {
+        public static final int kPlatformPort = 19;
+    }
 }
