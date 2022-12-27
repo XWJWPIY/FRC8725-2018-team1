@@ -22,6 +22,8 @@ public class ElevatorModule {
         Motor = new CANSparkMax(MotorId, MotorType.kBrushless);
         this.MotorReversed = MotorReversed;
 
+        Motor.setSmartCurrentLimit(30);
+
         Motor.setIdleMode(IdleMode.kBrake); // 設為無動力時以慣性滑行
 
         Motor.setInverted(MotorReversed); // 是否反轉

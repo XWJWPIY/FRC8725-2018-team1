@@ -40,6 +40,9 @@ public class SwerveModule {
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless); // 設定前行馬達，並設為無刷
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless); // 設定轉向馬達，並設為無刷
         
+        driveMotor.setSmartCurrentLimit(30);
+        turningMotor.setSmartCurrentLimit(30);
+
         driveMotor.setIdleMode(IdleMode.kCoast); // 設為無動力時以慣性滑行
         turningMotor.setIdleMode(IdleMode.kCoast); // 設為無動力時以慣性滑行
                 

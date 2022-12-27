@@ -7,23 +7,27 @@ import frc.robot.Constants.PlatformConstants;
 import frc.robot.RobotMap.PlatformPort;
 
 public class PlatformSubsystem extends SubsystemBase {
-    private final PlatformModule Platform = new PlatformModule(PlatformPort.kPlatformPort, false); // 設定平台控制器
-
+    private final PlatformModule LeftMotor = new PlatformModule(PlatformPort.kLeftPlatformPort, false); // 設定平台控制器
+    private final PlatformModule RightMotor = new PlatformModule(PlatformPort.kRightPlatformPort, true); //
+    
 
     public PlatformSubsystem() { // 建構函式
         new Thread(() -> {}).start();
     }
 
     public void runModules(boolean run, boolean reverse) { // 進行轉動 (雙臂同時開或合)
-        Platform.Running(run, reverse);
+        LeftMotor.Running(run, reverse);
+        RightMotor.Running(run, reverse);
     }
  
     @Override
     public void periodic() {
-        Platform.putDashboard(); // 上傳左電梯高度 Encoder
+        LeftMotor.putDashboard(); // 上傳左電梯高度 Encoder
+        RightMotor.putDashboard(); 
     }
 
     public void stopModules() { // 停止所有模組
-        Platform.stop();
+        LeftMotor.stop();
+        RightMotor.stop();
     }
 }
