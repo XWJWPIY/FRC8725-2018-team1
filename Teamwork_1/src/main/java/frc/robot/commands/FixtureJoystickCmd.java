@@ -16,7 +16,8 @@ public class FixtureJoystickCmd extends CommandBase {
     private final Supplier<Boolean> PushButton; // 吐方塊
 
 
-    public FixtureJoystickCmd(FixtureSubsystem fixtureSubsystem, Supplier<Double> ySpdFunction, Supplier<Boolean> PullButton, Supplier<Boolean> PushButton) {
+    public FixtureJoystickCmd(FixtureSubsystem fixtureSubsystem, Supplier<Double> ySpdFunction, 
+            Supplier<Boolean> PullButton, Supplier<Boolean> PushButton) {
         this.fixtureSubsystem = fixtureSubsystem;
         this.ySpdFunction = ySpdFunction;
         this.PullButton = PullButton;

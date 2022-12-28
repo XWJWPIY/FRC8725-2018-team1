@@ -64,13 +64,16 @@ public final class Constants {
         public static final double kElevatorMotorWheelRadius = 2; // 馬達輪半徑
         public static final double kElevatorUpperWheelRadius = 2; // 升降輪半徑
         public static final double kElevatorMotorWheelDiameterMeters = Units.inchesToMeters(kElevatorMotorWheelRadius * 2); // 馬達輪 inch -> m
-        public static final double kElevatorUpperWheelDiameterMeters = Units.inchesToMeters(kElevatorUpperWheelRadius * 2); // 升降輪 inch -> m
-        public static final double kElevatorMotorGearRatio = 1 / 8.14; // 齒輪轉動比
+        public static final double kElevatorMotorGearRatio = 1; // 齒輪轉動比
         public static final double kElevatorEncoderRot2Meter = kElevatorMotorGearRatio * Math.PI * kElevatorMotorWheelDiameterMeters; // 以 Encorder 的值轉換為現在高度，單位為 m
         public static final double kElevatorEncoderRPM2MeterPerSec = kElevatorEncoderRot2Meter / 60; // 將單位轉換為 m/s
         public static final double kPhysicalMaxSpeedMetersPerSecond = Units.feetToMeters(12); // 紀錄 feet 轉換 Meter 倍率
         public static final double kElevatorMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 2; // 遠程驅動最大前進速度值
         public static final double kTurningSpeed = 0.5; // 轉動速度
+
+        public static final double kLRSpeed = 0.5; // 左右擺動馬達
+
+
     }
 
     public static final class FixtureConstants {

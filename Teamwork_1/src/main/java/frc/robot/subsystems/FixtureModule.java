@@ -28,8 +28,11 @@ public class FixtureModule {
         this.HandMotorReversed = HandMotorReversed;
         this.ArmMotorReversed = ArmMotorReversed;
 
-        HandMotor.setIdleMode(IdleMode.kCoast); // 設為無動力時以鎖定
-        ArmMotor.setIdleMode(IdleMode.kCoast);
+        HandMotor.setSmartCurrentLimit(30);
+        HandMotor.setSmartCurrentLimit(30);
+
+        HandMotor.setIdleMode(IdleMode.kBrake); // 設為無動力時以鎖定
+        ArmMotor.setIdleMode(IdleMode.kBrake);
 
         HandMotor.setInverted(HandMotorReversed); // 是否反轉
         ArmMotor.setInverted(ArmMotorReversed);
@@ -57,9 +60,9 @@ public class FixtureModule {
     public void HandRunning(boolean Running, boolean reverse) {  // 手臂收放方塊
         if (Running == true) { // 若是啟動
             if (reverse) { // 方向是否反轉
-                HandMotor.set(FixtureConstants.kFrontFixtureRPM2MeterPerSec); // 吸
+                HandMotor.set(FixtureConstants.kHandTurningSpeed); // 吸
             } else {
-                HandMotor.set(-FixtureConstants.kFrontFixtureRPM2MeterPerSec); // 吐
+                HandMotor.set(-FixtureConstants.kHandTurningSpeed); // 吐
             }
         }
         getHandPosition();
@@ -69,9 +72,9 @@ public class FixtureModule {
     public void ArmRunning(boolean Running, boolean reverse) {  // 手臂開合
         if (Running == true) { // 若是啟動
             if (reverse) { // 方向是否反轉
-                ArmMotor.set(FixtureConstants.kBackFixtureEncoderRot2RadPerSec); // 開
+                ArmMotor.set(FixtureConstants.kArmTurningSpeed); // 開
             } else {
-                ArmMotor.set(-FixtureConstants.kBackFixtureEncoderRot2RadPerSec); // 合
+                ArmMotor.set(-FixtureConstants.kArmTurningSpeed); // 合
             }
         }
         getHandPosition();

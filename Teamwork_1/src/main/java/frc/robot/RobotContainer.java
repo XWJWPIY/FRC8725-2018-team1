@@ -48,8 +48,10 @@ public class RobotContainer {
                 () -> driverJoystick.getRawAxis(GamepadJoystick.kDriverRotAxis),
                 () -> !driverJoystick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
 
-        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, () -> driverJoystick.getRawAxis(GamepadJoystick.kElevatorAxis)));
-        
+        m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, 
+                () -> driverJoystick.getRawAxis(GamepadJoystick.kElevatorAxis), 
+                () -> driverJoystick.getRawButton(GamepadJoystick.kElevatorClockwiseButtonIdx), 
+                () -> driverJoystick.getRawButton(GamepadJoystick.kElevatorUnclockwiseButtonIdx)));
         m_fixtureSubsystem.setDefaultCommand(new FixtureJoystickCmd(
                 m_fixtureSubsystem, 
                 () -> driverJoystick.getRawAxis(GamepadJoystick.kFixtureArmAxis),
@@ -65,9 +67,8 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-        new JoystickButton(driverJoystick, GamepadJoystick.kDriverFieldOrientedButtonIdx).whenPressed(() -> m_swerveSubsystem.zeroHeading()); // 歸零
-
-
+        new JoystickButton(driverJoystick, GamepadJoystick.kDriverFieldOrientedButtonIdx).whenPressed(() -> 
+            m_swerveSubsystem.zeroHeading()); // 歸零
     }
 
     /*

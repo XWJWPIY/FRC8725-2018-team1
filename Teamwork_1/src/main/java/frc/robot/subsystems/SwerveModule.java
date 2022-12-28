@@ -24,8 +24,8 @@ public class SwerveModule {
     private final PIDController turningPidController; // 
 
     private final CANCoder absoluteEncoder; // 絕對定向編碼器(在Swerve的最上方的位置)
-    private final boolean absoluteEncoderReversed; // 角度是否要加負號 (?
-    private final double absoluteEncoderOffsetRad; // 抵消用角度 (?
+    private final boolean absoluteEncoderReversed; // 角度是否要為負
+    private final double absoluteEncoderOffsetRad; // 抵消用角度(與0相比)
 
 
     public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
