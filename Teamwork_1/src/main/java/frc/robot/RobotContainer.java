@@ -49,9 +49,7 @@ public class RobotContainer {
                 () -> !driverJoystick.getRawButton(GamepadJoystick.kDriverFieldOrientedButtonIdx)));
 
         m_elevatorSubsystem.setDefaultCommand(new ElevatorJoystickCmd(m_elevatorSubsystem, 
-                () -> driverJoystick.getRawAxis(GamepadJoystick.kElevatorAxis), 
-                () -> driverJoystick.getRawButton(GamepadJoystick.kElevatorClockwiseButtonIdx), 
-                () -> driverJoystick.getRawButton(GamepadJoystick.kElevatorUnclockwiseButtonIdx)));
+                () -> driverJoystick.getRawAxis(GamepadJoystick.kElevatorAxis)));
         m_fixtureSubsystem.setDefaultCommand(new FixtureJoystickCmd(
                 m_fixtureSubsystem, 
                 () -> driverJoystick.getRawAxis(GamepadJoystick.kFixtureArmAxis),

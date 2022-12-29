@@ -9,7 +9,6 @@ import frc.robot.RobotMap.ElevatorPort;
 public class ElevatorSubsystem extends SubsystemBase {
     private final ElevatorModule LeftMotor = new ElevatorModule(ElevatorPort.kLeftMotorPort, false); // 設定左馬達模組
     private final ElevatorModule RightMotor = new ElevatorModule(ElevatorPort.kRightMotorPort, true); // 設定右馬達模組
-    private final ElevatorTurningModule MiddleMotor = new ElevatorTurningModule(ElevatorPort.kMiddleMotorPort, false); // 中傾馬達
 
 
     public ElevatorSubsystem() { // 建構函式
@@ -21,20 +20,14 @@ public class ElevatorSubsystem extends SubsystemBase {
         RightMotor.Running(run, !reverse);
     }
 
-    public void runMiddleModule(boolean run, boolean reverse) { // 執行中傾馬達
-        MiddleMotor.Running(run, reverse);
-    }
- 
     @Override
     public void periodic() {
         LeftMotor.putDashboard(); // 上傳左電梯高度 Encoder
         RightMotor.putDashboard(); // 上傳右電梯高度 Encoder
-        MiddleMotor.putDashboard();
     }
 
     public void stopModules() { // 停止所有模組
         LeftMotor.stop();
         RightMotor.stop();
-        MiddleMotor.stop();
     }
 }

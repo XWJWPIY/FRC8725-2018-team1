@@ -11,8 +11,6 @@ public class GamepadJoystick {
     public static final double kDeadband = 0.05;
 
     public static final int kElevatorAxis = 6;
-    public static final int kElevatorClockwiseButtonIdx = 6;
-    public static final int kElevatorUnclockwiseButtonIdx = 5;
 
     public static final int kFixtureArmAxis = 5;
     public static final int kFixturePullButtonIdx = 2;
