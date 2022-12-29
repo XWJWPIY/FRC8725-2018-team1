@@ -29,7 +29,7 @@ public class FixtureModule {
         this.ArmMotorReversed = ArmMotorReversed;
 
         HandMotor.setSmartCurrentLimit(30);
-        HandMotor.setSmartCurrentLimit(30);
+        ArmMotor.setSmartCurrentLimit(30);
 
         HandMotor.setIdleMode(IdleMode.kBrake); // 設為無動力時以鎖定
         ArmMotor.setIdleMode(IdleMode.kBrake);
